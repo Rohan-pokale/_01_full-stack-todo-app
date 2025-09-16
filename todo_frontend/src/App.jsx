@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const [task, setTask] = useState("");
@@ -37,6 +39,7 @@ function App() {
           setTask("");
           setEditId(null);
           fetchTasks();
+          toast.info("✏ Task updated!");
         })
         .catch((err) => console.error("Error updating task:", err));
     } else {
@@ -49,6 +52,7 @@ function App() {
         .then(() => {
           setTask("");
           fetchTasks();
+          toast.success("Task added successfully!");
         })
         .catch((err) => console.error("Error adding task:", err));
     }
@@ -65,36 +69,53 @@ function App() {
     fetch(`${API_URL}/${id}`, {
       method: "DELETE",
     })
-      .then(() => fetchTasks())
+      .then(() => {
+        fetchTasks();
+        toast.warn("🗑 Task deleted!");
+      })
       .catch((err) => console.error("Error deleting task:", err));
   };
 
   return (
-    <div className="app">
-      <h1 className="title">TaskFlow – Stay Organized 🚀</h1>
+    <>
+      <div className="app">
+        <h1 className="title">TaskFlow – Stay Organized 🚀</h1>
 
-      <div className="input-container">
-        <input
-          type="text"
-          value={task}
-          onChange={(e) => setTask(e.target.value)}
-          placeholder="Enter a task..."
-        />
-        <button onClick={saveTask}>{editId ? "Update" : "Add"}</button>
+        <div className="input-container">
+          <input
+            type="text"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+            placeholder="Enter a task..."
+          />
+          <button onClick={saveTask}>{editId ? "Update" : "Add"}</button>
+        </div>
+
+        <ul className="task-list">
+          {tasks.map((t) => (
+            <li key={t.id} className="task-item">
+              <span>{t.name}</span>
+              <div className="actions">
+                <button onClick={() => editTask(t)}>✏</button>
+                <button onClick={() => deleteTask(t.id)}>🗑</button>
+              </div>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      <ul className="task-list">
-        {tasks.map((t) => (
-          <li key={t.id} className="task-item">
-            <span>{t.name}</span>
-            <div className="actions">
-              <button onClick={() => editTask(t)}>✏</button>
-              <button onClick={() => deleteTask(t.id)}>🗑</button>
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+      {/* 🔹 Keep ToastContainer OUTSIDE the scrollable app container */}
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnHover
+        draggable
+        theme="light"
+      />
+    </>
   );
 }
 
