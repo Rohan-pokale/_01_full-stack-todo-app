@@ -1,0 +1,123 @@
+/* General layout */
+body {
+  font-family: "Poppins", sans-serif;
+  background: url("https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1600&q=80")
+    no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 40px;
+}
+
+/* Glassmorphism App container */
+.app {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.25);
+  width: 400px;
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.title {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 26px;
+  background: linear-gradient(90deg, #4a90e2, #ff6ec4, #42e695);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Input + Button */
+.input-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.input-container input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #ffffffaa;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+  transition: 0.3s;
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.input-container input:focus {
+  border-color: #4a90e2;
+  background: #fff;
+}
+
+.input-container button {
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  border: none;
+  padding: 12px 18px;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-container button:hover {
+  background: linear-gradient(135deg, #357abd, #2d5fa8);
+}
+
+/* Task list */
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.task-item {
+  background: rgba(255, 255, 255, 0.85);
+  margin: 8px 0;
+  padding: 12px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: transform 0.2s, background 0.3s;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.15);
+}
+
+.task-item:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 1);
+}
+
+.actions button {
+  background: none;
+  border: none;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s;
+}
+
+.actions button:hover {
+  transform: scale(1.2);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
